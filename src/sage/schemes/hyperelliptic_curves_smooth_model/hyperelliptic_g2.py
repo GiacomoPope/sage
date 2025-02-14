@@ -2,6 +2,7 @@ from sage.misc.cachefunc import cached_method
 from sage.schemes.hyperelliptic_curves_smooth_model import (
     hyperelliptic_generic,
     invariants,
+    kummer_surface,
 )
 from sage.schemes.hyperelliptic_curves_smooth_model.hyperelliptic_finite_field import (
     HyperellipticCurveSmoothModel_finite_field,
@@ -260,6 +261,9 @@ class HyperellipticCurveSmoothModel_g2(
         """
         f, h = self.hyperelliptic_polynomials()
         return invariants.absolute_igusa_invariants_kohel(4 * f + h**2)
+
+
+
 
 
 class HyperellipticCurveSmoothModel_g2_padic_field(

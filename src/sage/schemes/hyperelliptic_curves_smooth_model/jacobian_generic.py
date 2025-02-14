@@ -21,6 +21,7 @@ from sage.schemes.hyperelliptic_curves_smooth_model import (
     jacobian_homset_ramified,
     jacobian_homset_split,
     jacobian_morphism,
+    kummer_surface,
 )
 from sage.schemes.jacobians.abstract_jacobian import Jacobian_generic
 
