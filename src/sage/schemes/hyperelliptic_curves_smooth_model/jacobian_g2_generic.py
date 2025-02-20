@@ -1,3 +1,4 @@
+from sage.misc.cachefunc import cached_method
 from sage.schemes.hyperelliptic_curves_smooth_model import (
     jacobian_g2_homset_inert,
     jacobian_g2_homset_ramified,
@@ -30,6 +31,7 @@ class HyperellipticJacobian_g2_generic(HyperellipticJacobian_generic):
             *args, **kwds
         )
 
+    @cached_method
     def kummer_surface(self):
         r"""
         Construct the Kummer surface from the Jacobian of a genus-2 curve.
@@ -46,15 +48,28 @@ class HyperellipticJacobian_g2_generic(HyperellipticJacobian_generic):
             X0**4 - 4*X0*X1**2*X2 + 2*X0**2*X2**2 + X2**4 + 2*X0**2*X1*X3 + 2*X1*X2**2*X3 + X1**2*X3**2 - 4*X0*X2*X3**2
         """
         K = KummerSurface(self)
-        self._kummer_surface = K
         return K
 
     def mumford_to_kummer(self, P):
         r"""
         Given a point P on the Jacobian J of a genus-2 curve, 
         return the Kummer coordinates of P.
+
+        EXAMPLES::
+
+            sage: R.<x> = GF(19)[]
+            sage: H = HyperellipticCurveSmoothModel(x^6 + 3*x + 5, x^2 + x)
+            sage: J = Jacobian(H)
+            sage: P = J([x^2 + 11*x + 13, 18*x + 10])
+            sage: J.mumford_to_kummer(P)
+            (7, 18, 15, 15)
+            sage: Q = J([x, 9])
+            sage: J.mumford_to_kummer(Q)
+            (0, 1, 0, 18)
+            sage: J.mumford_to_kummer(J.zero())
+            (0, 0, 0, 1)
         """
-        K = self._kummer_surface
+        K = self.kummer_surface()
         C = self.curve()
         f, h = C.hyperelliptic_polynomials()
         [h0,h1,h2,h3] = [h[i] for i in range(4)]

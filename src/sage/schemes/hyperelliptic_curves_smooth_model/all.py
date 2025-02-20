@@ -2,3 +2,4 @@ from sage.schemes.hyperelliptic_curves_smooth_model.hyperelliptic_constructor im
     HyperellipticCurveSmoothModel,
 )
 from sage.schemes.hyperelliptic_curves_smooth_model.kummer_surface import KummerSurface
+from sage.schemes.hyperelliptic_curves_smooth_model.kummer_surface_point import KummerSurfacePoint
